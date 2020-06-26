@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
-const functions = require('../../public/javascripts/userFunctions')
+const functions = require('../../public/javascripts/userFunctions');
+const db = require('../database/models');
 
 const controller = {
     processLogin: (req, res, next) => {
