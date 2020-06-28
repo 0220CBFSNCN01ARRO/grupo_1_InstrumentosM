@@ -1,8 +1,8 @@
-module.exports ={
+module.exports  = {
   "development": {
     "username": "root",
-    "password": 1234554321,
-    "database": "pick'and'play",
+    "password": "root",
+    "database": "testplay",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": 0
@@ -24,3 +24,5 @@ module.exports ={
     "operatorsAliases": false
   }
 }
+
+
