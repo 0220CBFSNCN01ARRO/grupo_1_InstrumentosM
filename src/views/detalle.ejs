@@ -20,7 +20,6 @@
             <%  let imagenes = pictures
                 for (let i=0; i < imagenes.length; i++){
                 let imagenX = imagenes[i];
-                
                 let posicion = imagenes.indexOf(imagenX)
                 let estado = ""
                 if(posicion == 0){
@@ -112,6 +111,7 @@
       <div class="modal-botones">
         <button type="button" class="btn btn-verde" data-dismiss="modal">Salir</button>
         <form action="/products/delete/<%= producto.id %>?_method=DELETE" method="POST" style="display: inline-flex">
+          
           <button type="submit" class="btn btn-rojo">Borrar producto</button>
         </form>
       </div>

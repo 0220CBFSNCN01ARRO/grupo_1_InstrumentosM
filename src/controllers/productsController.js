@@ -31,15 +31,19 @@ const controller = {
             }).catch((error) => console.log(error));
     },
 
-    delete: (req, res, next) => {
-
-        db.Articles.destroy({
+    delete: async (req, res) => {
+        let deletedArticle = await db.Articles.findByPk(req.params.id)
+        await db.Articles.destroy({
             where:{
                 id: req.params.id
             }
         })
-        .then(() => res.redirect('/products'))
-        .catch(error => console.log(error))
+        let arrayImages = JSON.parse(deletedArticle.image)
+        console.log(arrayImages);
+        arrayImages.forEach(image => fs.unlinkSync(path.join(__dirname,`../../public/images/imgInstrumentos/${image}`)))
+        return res.redirect('/products')
+
+        //array1.forEach(element => console.log(element));
 
     },
 
@@ -100,13 +104,13 @@ const controller = {
     },
     add: function (req, res) {
         //crea string de nombre de imagenes para mandar a db
-        
+
         let images = [];
         for (let i = 0; i < req.files.length; i++) {
             images.push(req.files[i].filename);
         }
         //console.log(images);
-        
+
         let imagesString = JSON.stringify(images);
         //console.log(imagesString);
 
