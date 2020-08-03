@@ -20,13 +20,13 @@ const controller = {
             data: [
                  {
                     cardName: 'Products in Data Base',
-                    value: products.length,
+                    amount: products.length,
                     icon:'fas fa-clipboard-list',
                 },
                 {
                     color:'success',
                     cardName: 'Amount in products',
-                    value: '$' + amount,
+                    amount: '$' + amount,
                     icon:'fas fa-dollar-sign',
                 },
 
@@ -46,33 +46,6 @@ const controller = {
         }
         
 }
-  //      })
-//
-  //  },
-//
-  //  profile: async (req, res) => {
-  //      const user = await db.Users.findByPk(req.params.id)
-  //      res.json({
-  //          meta:{
-  //              status: 200,
-  //              link: `/api/profile/${user.id}`
-  //          },
-  //          data: [
-  //          {
-  //                  id: user.id,
-  //                  email: user.email,
-  //                  firstName: user.firstName,
-  //                  lastName: user.lastName,
-  //                  rating: user.rating,
-  //                  avatar: user.avatar,
-  //                  
-  //              }
-  //          });
- //   },
-//
-//
- //   
- //   
-//};
+
         
 module.exports = controller
