@@ -4,6 +4,7 @@ import CategoryCard from './CategoryCard';
 import AllUsers from './AllUsers';
 import AllProductsTable from './AllProductsTable';
 import LastProductNew from './LastProductNew';
+//import { data } from 'jquery';
 
 
 
@@ -14,30 +15,26 @@ class  DivCont extends Component {
     constructor(props){
         super(props);
         this.state = {
-            stringUsers: ''
+            cards :[]
         }
     }
 
-    apiCall(url, consecuencia){
-        fetch(url)
-        .then(response => response.json())
-        .then(data => consecuencia(data))
-        .catch(error => console.log(error))
-    }
+    
     componentDidMount(){
-        console.log('Mounted');
-        this.apiCall('/api/users/', this.mostrarUsuariosCantidad)
-    }
-    mostrarUsuariosCantidad = (data) => {
-        console.log(data.data[0].name);
-        this.setState({
-            stringUsers: data.data 
+        fetch('/api/widgets/')
+        .then(res => res.json())
+        .then(res=>{
+            this.setState({
+                cards:res.data
+                
+            })
+            console.log(res.data)
         })
+        console.log('Montado');
     }
+    
 
-    componentDidUpdate(){
-        console.log('Updated');
-    }
+    
     render(){
         console.log('Rendered');
 
@@ -51,18 +48,23 @@ class  DivCont extends Component {
 <div className="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 className="h3 mb-0 text-gray-800">App Dashboard</h1>
 </div>
+    
 
-{/*<!-- Content Row -->*/}
-<div className="row">
+    {/*<!-- Content Row -->*/}
+    <div className="row">
 
-    {/*<!-- Amount of Products in DB -->*/}
-    <Card cardName='Products in Data Base' amount='55' icon='fas fa-clipboard-list fa-2x text-gray-300' color='primary'/>
+    { 
+        this.state.cards.map((card,i)=>{
+        return(
+        // <div className="col-md-3 mb-6 " >
+                <Card key={i}{...card}/>
+        // </div>
+        );
+    })
+    }
 
-    {/*<!-- $$$ of all products in DB -->*/}
-    <Card cardName='Amount in products' amount='$190.000' icon='fas fa-dollar-sign fa-2x text-gray-300' color='success'/>
-
-    {/*<!-- Amount of users in DB -->*/}
-    <Card cardName='Users quantity' amount={this.state.stringUsers.length} icon='fas fa-user-check fa-2x text-gray-300' color='warning'/>
+    
+  
     </div>
     {/*<!-- Content Row -->*/}
     <div className="row">

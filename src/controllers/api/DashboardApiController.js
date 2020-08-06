@@ -1,49 +1,47 @@
 let db = require("../../database/models");
 const product = require ("../../database/models/Article")
-const { Op } = db.Sequelize;
+//const { Op } = db.Sequelize;
 
 
 const controller = {
     widgets: async (req, res) =>{
-        const users = await db.Users.findAll();
-        const products = await db.Articles.findAll();
+        let users = await db.Users.findAll();
+        let products = await db.Articles.findAll();
 
         let amount = 0
-        products.map(product => amount += product.price);
-
+        products.map(product => {amount +=Number(product.price)});
+        console.log(amount)
         res.json({
             meta:{
                 status: 200,
                 count: users.length,
-                link: '/api/dashboard/widgets/'
+                link: '/api/widgets/'
             },
             data: [
                  {
-                    cardName: 'Products in Data Base',
-                    amount: products.length,
+                    name: 'Products in Data Base',
+                    value: products.length,
                     icon:'fas fa-clipboard-list',
                 },
                 {
                     color:'success',
-                    cardName: 'Amount in products',
-                    amount: '$' + amount,
+                    name: 'Amount in products',
+                    value: `$ ${amount}`,
                     icon:'fas fa-dollar-sign',
                 },
 
                 {
                     color:'warning',
-                    cardName: 'Users quantity',
+                    name: 'Users quantity',
                     value: users.length,
                     icon:'fas fa-user-check',
                 },
             ]
             })
-        },
-
-        products: async (req,res) =>{
-
-            const products = await db.Product.findAll({include:['category']});
         }
+
+
+        
         
 }
 
